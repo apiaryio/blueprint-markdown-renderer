@@ -1,0 +1,29 @@
+{
+  "name": "blueprint-markdown-parser",
+  "nicename": "Blueprint Markdown Parser",
+  "version": "0.0.1",
+  "description": "Default parser and set of settings for parsing Markdown blocks in API Blueprint",
+  "main": "./lib",
+  "scripts": {
+    "lint": "eslint --ext .js",
+    "server-test": "mocha -R spec --recursive",
+    "browser-test": "karma start",
+    "test": "npm run server-test && npm run browser-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:apiaryio/blueprint-markdown-parser.git"
+  },
+  "author": "Apiary Czech Republic, s.r.o. <support@apiary.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "",
+    "karma": "",
+    "karma-browserify": "",
+    "karma-chai": "",
+    "karma-firefox-launcher": "",
+    "karma-mocha": "",
+    "karma-mocha-reporter": "",
+    "mocha": ""
+  }
+}
