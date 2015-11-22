@@ -2,11 +2,68 @@
 
 Default parser and set of settings for parsing and rendering of Markdown blocks in API Blueprint
 
+## Examples
+
+### Basic Rendering Of Blueprint Descriptions
+
+TBD
 
 
-## Usage
+### Basic Rendering Usage
 
-_TBD_
+```js
+import renderDescription from 'blueprint-markdown-render';
+
+const mdText = '# Heading';
+
+const html = render(mdText);
+
+console.log("Rendered HTML: ", html);
+```
+
+
+## Motivation
+
+While [API Blueprint](https://apiblueprint.org/) syntax is based on Markdown, it doesn't care about the (Markdown) content of description blocks. The [reference parser](https://github.com/apiaryio/drafter) actually preserves the source Markdown in the produced AST.
+
+This library is intended to provide a consistent API for parsing those Markdown blocks. Use it to get same defaults and consistent rendering with the rest of JavaScript API Blueprint ecosystem.
+
+To get consistent experience accross languages, this library uses [CommonMark](http://commonmark.org) implementation under its hood. Those extensions to default rendering is enabled by default:
+
+* TBD
+
+## Advanced Usage
+
+Note that if you pass in any options, you are potentially diverging from the ecosystem, therefore this is not encouraged. However, it's still better to share the same rendering core with customised behaviour than it is to start for the blank slate.
+
+```js
+import renderDescription from 'blueprint-markdown-render';
+
+const mdText = '# Heading';
+
+const renderingOptions = {
+	sanitize: false, // Disables HTML sanitization, which is now left up to you. Dangerous, use only if you are triple sure
+
+	// tweaks rendering extensions
+	formattingExtensions: {
+
+		noteBlock: true,    // enables :::note block
+		warningBlock: true, // enables :::warning block
+		noteBlock: true,    // enables :::note block
+	},
+
+	//custom plugins to MarkedIt. Try not to use those as you are relying on implementation detail
+	markeditPlugins: {
+
+	}
+
+}
+
+const html = render(mdText, renderingOptions);
+
+console.log("Rendered HTML: ", html);
+
+```
 
 ## Installation
 
