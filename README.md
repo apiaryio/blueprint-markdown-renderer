@@ -1,9 +1,7 @@
-# Blueprint Markdown Parser
+# Blueprint Markdown Renderer
 
-Default parser and set of settings for parsing Markdown blocks in API Blueprint
+Default parser and set of settings for parsing and rendering of Markdown blocks in API Blueprint
 
-
-[![TravisCI Build Status](https://travis-ci.org/apiaryio/blueprint-markdown-parser.svg?branch=master)](https://travis-ci.org/apiaryio/blueprint-markdown-parser)
 
 
 ## Usage
@@ -13,7 +11,7 @@ _TBD_
 ## Installation
 
 ```shell
-$ npm install blueprint-markdown-parser
+$ npm install blueprint-markdown-renderer
 ```
 
 ## Development

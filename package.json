@@ -1,8 +1,8 @@
 {
-  "name": "blueprint-markdown-parser",
-  "nicename": "Blueprint Markdown Parser",
+  "name": "blueprint-markdown-renderer",
+  "nicename": "Blueprint Markdown Renderer",
   "version": "0.0.1",
-  "description": "Default parser and set of settings for parsing Markdown blocks in API Blueprint",
+  "description": "Default parser and set of settings for parsing and rendering Markdown blocks in API Blueprint",
   "main": "./lib",
   "scripts": {
     "lint": "eslint --ext .js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:apiaryio/blueprint-markdown-parser.git"
+    "url": "git+ssh://git@github.com:apiaryio/blueprint-markdown-renderer.git"
   },
   "author": "Apiary Czech Republic, s.r.o. <support@apiary.io>",
   "license": "MIT",
