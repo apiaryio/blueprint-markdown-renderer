@@ -12,11 +12,11 @@ TBD
 ### Basic Rendering Usage
 
 ```js
-import renderDescription from 'blueprint-markdown-render';
+import renderHtml from 'blueprint-markdown-render';
 
 const mdText = '# Heading';
 
-const html = render(mdText);
+const html = renderHtml(mdText);
 
 console.log("Rendered HTML: ", html);
 ```
@@ -37,7 +37,7 @@ To get consistent experience accross languages, this library uses [CommonMark](h
 Note that if you pass in any options, you are potentially diverging from the ecosystem, therefore this is not encouraged. However, it's still better to share the same rendering core with customised behaviour than it is to start for the blank slate.
 
 ```js
-import renderDescription from 'blueprint-markdown-render';
+import renderHtml from 'blueprint-markdown-render';
 
 const mdText = '# Heading';
 
@@ -59,7 +59,7 @@ const renderingOptions = {
 
 }
 
-const html = render(mdText, renderingOptions);
+const html = renderHtml(mdText, renderingOptions);
 
 console.log("Rendered HTML: ", html);
 

@@ -25,5 +25,9 @@
     "karma-mocha": "",
     "karma-mocha-reporter": "",
     "mocha": ""
+  },
+  "dependencies": {
+    "markdown-it": "^5.0.2",
+    "sanitizer": "^0.1.2"
   }
 }
