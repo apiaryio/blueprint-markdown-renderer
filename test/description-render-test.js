@@ -44,7 +44,7 @@ describe('Markdown', function() {
     it('Parse nested lists', function(done) {
       var expectedHtml, markdownString;
       markdownString = '* Lorem\n* Ipsum\n  * Dolor\n  * Ismaet';
-      expectedHtml = '<ul>\n<li>Lorem</li>\n<li>Ipsum\n\n<ul>\n<li>Dolor</li>\n<li>Ismaet</li>\n</ul></li>\n</ul>\n';
+      expectedHtml = '<ul>\n<li>Lorem</li>\n<li>Ipsum\n<ul>\n<li>Dolor</li>\n<li>Ismaet</li>\n</ul>\n</li>\n</ul>\n';
       return markdown.renderHtml(markdownString, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         return done(error);
@@ -53,7 +53,7 @@ describe('Markdown', function() {
     it('Parse headers', function(done) {
       var expectedHtml, markdownString;
       markdownString = '# Level 1\n## Level 2\n### Level 3\n#### Level 4\n##### Level 5\n###### Level 6';
-      expectedHtml = '<h1>Level 1</h1>\n\n<h2>Level 2</h2>\n\n<h3>Level 3</h3>\n\n<h4>Level 4</h4>\n\n<h5>Level 5</h5>\n\n<h6>Level 6</h6>\n';
+      expectedHtml = '<h1>Level 1</h1>\n<h2>Level 2</h2>\n<h3>Level 3</h3>\n<h4>Level 4</h4>\n<h5>Level 5</h5>\n<h6>Level 6</h6>\n';
       return markdown.renderHtml(markdownString, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         return done(error);
@@ -62,7 +62,7 @@ describe('Markdown', function() {
     it('Parse a code block', function(done) {
       var expectedHtml, markdownString;
       markdownString = 'Lorem ipsum dolor isamet.\n\n    alert(\'Hello!\');';
-      expectedHtml = '<p>Lorem ipsum dolor isamet.</p>\n\n<pre><code>alert(&#39;Hello!&#39;);\n</code></pre>\n';
+      expectedHtml = "<p>Lorem ipsum dolor isamet.</p>\n<pre><code>alert('Hello!');</code></pre>\n";
       return markdown.renderHtml(markdownString, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         return done(error);
@@ -71,7 +71,7 @@ describe('Markdown', function() {
     it('Parse a fenced code block', function(done) {
       var expectedHtml, markdownString;
       markdownString = '```\nalert(\'Hello!\');\n```';
-      expectedHtml = '<pre><code>alert(&#39;Hello!&#39;);\n</code></pre>\n';
+      expectedHtml = "<pre><code>alert('Hello!');\n</code></pre>\n";
       return markdown.renderHtml(markdownString, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         return done(error);
@@ -79,7 +79,7 @@ describe('Markdown', function() {
     });
     it('Parse a Markdown table', function(done) {
       var expectedHtml, markdownString;
-      markdownString = '| First Header  | Second Header | Third Header         |\n| :------------ | :-----------: | -------------------: |\n| First row     | Data          | Very long data entry |\n| Second row    | **Cell**      | *Cell*               |\n| Third row     | Cell that spans across two columns  ||';
+      markdownString = '\n\n| First Header  | Second Header | Third Header         |\n| :------------ | :-----------: | -------------------: |\nalert| First row     | Data          | Very long data entry |\n| Second row    | **Cell**      | *Cell*               |\n| Third row     | Cell that spans across two columns  ||';
       expectedHtml = '<table><thead>\n<tr>\n<th align="left">First Header</th>\n<th align="center">Second Header</th>\n<th align="right">Third Header</th>\n</tr>\n</thead><tbody>\n<tr>\n<td align="left">First row</td>\n<td align="center">Data</td>\n<td align="right">Very long data entry</td>\n</tr>\n<tr>\n<td align="left">Second row</td>\n<td align="center"><strong>Cell</strong></td>\n<td align="right"><em>Cell</em></td>\n</tr>\n<tr>\n<td align="left">Third row</td>\n<td align="center">Cell that spans across two columns</td>\n<td align="right"></td>\n</tr>\n</tbody></table>\n';
       return markdown.renderHtml(markdownString, function(error, html) {
         assert.strictEqual(html, expectedHtml);
@@ -126,7 +126,7 @@ describe('Markdown', function() {
       return it('Parse and sanitize images', function(done) {
         var expectedHtml, markdownString;
         markdownString = '<img src="/image.jpg" onerror="alert(\'XSS\')" />';
-        expectedHtml = '<p><img src="/image.jpg"></p>\n';
+        expectedHtml = '<img src="/image.jpg">\n';
         return markdown.renderHtml(markdownString, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           return done(error);
