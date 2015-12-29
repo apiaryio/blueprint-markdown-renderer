@@ -22,7 +22,7 @@ $ npm test
 ```
 
 By default, tests are ran on server as well as in the browser, using
-[Karma](karma-runner.github.io/). To ran manually just one specific type, use:
+[Karma](http://karma-runner.github.io/). To ran manually just one specific type, use:
 
 ```shell
 $ npm run server-test
