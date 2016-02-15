@@ -4,7 +4,7 @@ Default parser and set of settings for parsing and rendering of Markdown blocks 
 
 ## Examples
 
-### Basic Rendering Of Blueprint Descriptions
+### Basic Rendering of Blueprint Descriptions
 
 TBD
 
@@ -24,11 +24,11 @@ console.log("Rendered HTML: ", html);
 
 ## Motivation
 
-While [API Blueprint](https://apiblueprint.org/) syntax is based on Markdown, it doesn't care about the (Markdown) content of description blocks. The [reference parser](https://github.com/apiaryio/drafter) actually preserves the source Markdown in the produced AST.
+While [API Blueprint](https://apiblueprint.org/) syntax is based on Markdown, it doesn't care about the (Markdown) content of description blocks. The [reference parser](https://github.com/apiaryio/drafter) actually preserves the source Markdown in the produced API Elements.
 
-This library is intended to provide a consistent API for parsing those Markdown blocks. Use it to get same defaults and consistent rendering with the rest of JavaScript API Blueprint ecosystem.
+This library is intended to provide a consistent API for parsing those Markdown blocks. Use it to get the same defaults and consistent rendering with the rest of JavaScript API Blueprint ecosystem.
 
-To get consistent experience accross languages, this library uses [CommonMark](http://commonmark.org) implementation under its hood. Those extensions to default rendering is enabled by default:
+To get consistent experience accross languages, this library uses [CommonMark](http://commonmark.org) implementation under its hood. Following extensions to default rendering is enabled by default:
 
 * TBD
 
@@ -50,6 +50,7 @@ const renderingOptions = {
 		noteBlock: true,    // enables :::note block
 		warningBlock: true, // enables :::warning block
 		noteBlock: true,    // enables :::note block
+	
 	},
 
 	//custom plugins to MarkedIt. Try not to use those as you are relying on implementation detail
