@@ -8,7 +8,7 @@
     "lint": "eslint --ext .js",
     "server-test": "mocha -R spec --recursive",
     "browser-test": "karma start",
-    "test": "npm run server-test && npm run browser-test"
+    "test": "npm run server-test"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,10 @@
     "karma-mocha": "",
     "karma-mocha-reporter": "",
     "mocha": ""
+  },
+  "dependencies": {
+    "markdown-it": "^5.0.2",
+    "sanitizer": "^0.1.2",
+    "markedit-aligned-table": ""
   }
 }
