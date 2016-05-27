@@ -1,7 +1,13 @@
-var assert = require('chai').assert;
-var compareHtmlAsDomNodes = require('./utils').compareHtmlAsDomNodes;
+/*jslint node: true, eqnull: true */
 
-markdownRenderer = require('../lib/index.js');
+var assert = require('chai').assert;
+var compareHtmlAsDomNodes = require('./test-utils').compareHtmlAsDomNodes;
+
+var sanitizer = require('sanitizer');
+
+var markdownRenderer = require('../lib/index.js');
+
+var fixtures = require('./fixtures');
 
 describe('Compare', function() {
   describe('rendered HTML as DOM nodes', function() {
@@ -15,5 +21,22 @@ describe('Compare', function() {
         done(error);
       });
     });
+
+
+    Object.keys(fixtures).forEach(function(fixtureKey) {
+      it('Parses a fixture "' + fixtureKey + '"', function(done) {
+        var actualHtml;
+
+        actualHtml = markdownRenderer.renderRobotskirtHtml(''.concat(fixtures[fixtureKey]));
+
+        markdownRenderer.renderHtml(''.concat(fixtures[fixtureKey]), function(error, html) {
+          assert.ok(compareHtmlAsDomNodes(html, actualHtml));
+          done(error);
+        });
+
+      });
+    });
+
+
   });
 });
