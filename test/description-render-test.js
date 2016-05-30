@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('chai').assert;
 
 var markdownRenderer = require('../lib/index.js');
@@ -68,7 +70,7 @@ describe('Markdown', function() {
     it('Parse a code block', function(done) {
       var expectedHtml, markdownString;
       markdownString = 'Lorem ipsum dolor isamet.\n\n    alert(\'Hello!\');';
-      expectedHtml = "<p>Lorem ipsum dolor isamet.</p>\n<pre><code>alert('Hello!');</code></pre>\n";
+      expectedHtml = '<p>Lorem ipsum dolor isamet.</p>\n<pre><code>alert(\'Hello!\');</code></pre>\n';
       markdownRenderer.renderHtml(markdownString, {}, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         done(error);
@@ -78,7 +80,7 @@ describe('Markdown', function() {
     it('Parse a fenced code block', function(done) {
       var expectedHtml, markdownString;
       markdownString = '```\nalert(\'Hello!\');\n```';
-      expectedHtml = "<pre><code>alert('Hello!');\n</code></pre>\n";
+      expectedHtml = '<pre><code>alert(\'Hello!\');\n</code></pre>\n';
       markdownRenderer.renderHtml(markdownString, {}, function(error, html) {
         assert.strictEqual(html, expectedHtml);
         done(error);

@@ -1,9 +1,7 @@
-/*jslint node: true, eqnull: true */
+'use strict';
 
 var assert = require('chai').assert;
 var compareHtmlAsDomNodes = require('./test-utils').compareHtmlAsDomNodes;
-
-var sanitizer = require('sanitizer');
 
 var markdownRenderer = require('../lib/index.js');
 
