@@ -1,4 +1,4 @@
-
+'use strict';
 module.exports = function(config) {
   config.set({
 
@@ -8,7 +8,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'chai', 'mocha'],
+    frameworks: ['chai', 'mocha'],
 
 
     // list of files / patterns to load in the browser
@@ -43,7 +43,8 @@ module.exports = function(config) {
 
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values: config.LOG_DISABLE
+    // or levels: config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
 
@@ -59,5 +60,5 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: !!process.env.CI
-  })
-}
+  });
+};

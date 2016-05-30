@@ -1,34 +1,42 @@
 {
   "name": "blueprint-markdown-renderer",
   "nicename": "Blueprint Markdown Renderer",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "2.14.22"
+  },
   "description": "Default parser and set of settings for parsing and rendering Markdown blocks in API Blueprint",
   "main": "./lib",
   "scripts": {
     "lint": "eslint --ext .js",
-    "server-test": "mocha -R spec --recursive",
+    "server-test": "mocha -R spec --recursive ./test/**/*-test.js",
     "browser-test": "karma start",
     "test": "npm run server-test"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:apiaryio/blueprint-markdown-renderer.git"
+    "url": "git://github.com/apiaryio/blueprint-markdown-renderer.git"
   },
   "author": "Apiary Czech Republic, s.r.o. <support@apiary.io>",
   "license": "MIT",
+  "dependencies": {
+    "markdown-it": "^6.0.2",
+    "markdown-it-lazy-headers": "^0.1.3",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "sanitizer": "^0.1.3",
+    "robotskirt": ""
+  },
   "devDependencies": {
     "chai": "",
+    "dom-compare": "^0.2.1",
+    "jsdom": "^3.1.2",
     "karma": "",
-    "karma-browserify": "",
     "karma-chai": "",
     "karma-firefox-launcher": "",
     "karma-mocha": "",
     "karma-mocha-reporter": "",
     "mocha": ""
-  },
-  "dependencies": {
-    "markdown-it": "^5.0.2",
-    "sanitizer": "^0.1.2",
-    "markedit-aligned-table": ""
   }
 }
