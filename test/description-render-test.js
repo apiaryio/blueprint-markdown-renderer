@@ -77,6 +77,16 @@ describe('Markdown', function() {
       });
     });
 
+    it('Parse a link without markdown-brackets', function(done) {
+      var expectedHtml, markdownString;
+      markdownString = '*Here* it is http://link.to/page.html\n';
+      expectedHtml = '<p><em>Here</em> it is <a href="http://link.to/page.html">http://link.to/page.html</a></p>\n';
+      markdownRenderer.renderHtml(markdownString, {}, function(error, html) {
+        assert.strictEqual(html, expectedHtml);
+        done(error);
+      });
+    });
+
     it('Parse a fenced code block', function(done) {
       var expectedHtml, markdownString;
       markdownString = '```\nalert(\'Hello!\');\n```';
