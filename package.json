@@ -2,6 +2,10 @@
   "name": "blueprint-markdown-renderer",
   "nicename": "Blueprint Markdown Renderer",
   "version": "0.3.0-unstable",
+  "engines": {
+    "node": "0.12.x",
+    "npm": "2.x"
+  },
   "description": "Default parser and set of settings for parsing and rendering Markdown blocks in API Blueprint",
   "main": "./lib",
   "scripts": {
