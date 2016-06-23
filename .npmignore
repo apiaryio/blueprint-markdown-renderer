@@ -1,0 +1,8 @@
+.npmignore
+.gitignore
+node_modules
+npm-debug.log
+.DS_Store
+*.sublime-*
+test
+karma.conf.js
