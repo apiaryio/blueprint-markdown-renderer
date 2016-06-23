@@ -5,6 +5,24 @@ var assert = require('chai').assert;
 var markdownRenderer = require('../lib/index.js');
 
 describe('Markdown', function() {
+  describe('#toHtml sync (without callback)', function() {
+
+    it('Renders with options passed in', function() {
+      var expectedHtml, markdownString, html;
+      markdownString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+      expectedHtml = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n';
+      html = markdownRenderer.renderHtml(markdownString, {});
+      assert.strictEqual(html, expectedHtml);
+    });
+    it('Renders without options passed in', function() {
+      var expectedHtml, markdownString, html;
+      markdownString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+      expectedHtml = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n';
+      html = markdownRenderer.renderHtml(markdownString);
+      assert.strictEqual(html, expectedHtml);
+    });
+  });
+
   describe('#toHtml', function() {
 
     it('Parse a plain paragraph', function(done) {
