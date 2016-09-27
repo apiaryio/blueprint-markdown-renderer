@@ -25,7 +25,6 @@
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "robotskirt": "",
     "sanitizer": "^0.1.3"
   },
   "devDependencies": {
