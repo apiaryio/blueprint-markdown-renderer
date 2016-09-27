@@ -1,0 +1,11 @@
+.git
+.npmignore
+.gitignore
+.jshintrc
+karma.conf.js
+npm-debug.log
+
+test
+
+.DS_Store
+*.sublime-*
