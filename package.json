@@ -3,15 +3,14 @@
   "nicename": "Blueprint Markdown Renderer",
   "version": "0.3.0",
   "engines": {
-    "node": "0.10.x",
-    "npm": "2.15.x"
+    "node": ">=0.10 <5",
+    "npm": "2.x"
   },
   "description": "Default parser and set of settings for parsing and rendering Markdown blocks in API Blueprint",
   "main": "./lib",
   "scripts": {
     "lint": "eslint --ext .js",
-    "server-test": "mocha -R spec --recursive ./test/**/*-test.js",
-    "browser-test": "karma start",
+    "server-test": "mocha -R spec --recursive ./test/**-test.js",
     "test": "npm run server-test"
   },
   "repository": {
@@ -21,7 +20,7 @@
   "author": "Apiary Czech Republic, s.r.o. <support@apiary.io>",
   "license": "MIT",
   "dependencies": {
-    "markdown-it": "^7.0.0",
+    "markdown-it": "^8.0.0",
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
@@ -29,11 +28,6 @@
   },
   "devDependencies": {
     "chai": "",
-    "karma": "",
-    "karma-chai": "",
-    "karma-firefox-launcher": "",
-    "karma-mocha": "",
-    "karma-mocha-reporter": "",
-    "mocha": ""
+    "mocha": "2.x"
   }
 }
