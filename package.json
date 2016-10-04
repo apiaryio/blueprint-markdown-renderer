@@ -1,7 +1,7 @@
 {
   "name": "blueprint-markdown-renderer",
   "nicename": "Blueprint Markdown Renderer",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "engines": {
     "node": "0.10.x",
     "npm": "2.15.x"
