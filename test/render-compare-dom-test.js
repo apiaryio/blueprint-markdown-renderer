@@ -22,6 +22,9 @@ describe('Compare', function() {
 
 
     Object.keys(fixtures).forEach(function(fixtureKey) {
+      if (typeof fixtures[fixtureKey] !== 'string') {
+        return;
+      }
       it('Parses a fixture "' + fixtureKey + '"', function(done) {
         var actualHtml;
 
