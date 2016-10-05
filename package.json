@@ -10,7 +10,7 @@
   "main": "./lib",
   "scripts": {
     "lint": "eslint --ext .js",
-    "server-test": "mocha -R spec --recursive ./test/**-test.js",
+    "server-test": "mocha -R spec 'test/**/*-test.js'",
     "test": "npm run server-test"
   },
   "repository": {
