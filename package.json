@@ -10,8 +10,9 @@
   "main": "./lib",
   "scripts": {
     "lint": "eslint --ext .js",
-    "server-test": "mocha -R spec 'test/**/*-test.js'",
-    "test": "npm run server-test"
+    "test:unit": "mocha -R spec 'test/**/*-test.js'",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "test": "npm run test:unit"
   },
   "repository": {
     "type": "git",
