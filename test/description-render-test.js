@@ -5,6 +5,102 @@ var assert = require('chai').assert;
 var markdownRenderer = require('../lib/index.js');
 
 describe('Markdown', function() {
+  describe('#parse', function() {
+
+    it('Parse a paragraph', function(done) {
+      var expectedTokens, markdownString;
+      markdownString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+      expectedTokens = [
+        {
+          "type": "paragraph_open",
+          "tag": "p",
+          "attrs": null,
+          "map": [
+            0,
+            1
+          ],
+          "nesting": 1,
+          "level": 0,
+          "children": null,
+          "content": "",
+          "markup": "",
+          "info": "",
+          "meta": null,
+          "block": true,
+          "hidden": false
+        },
+        {
+          "type": "inline",
+          "tag": "",
+          "attrs": null,
+          "map": [
+            0,
+            1
+          ],
+          "nesting": 0,
+          "level": 1,
+          "children": [
+            {
+              "type": "text",
+              "tag": "",
+              "attrs": null,
+              "map": null,
+              "nesting": 0,
+              "level": 0,
+              "children": null,
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+              "markup": "",
+              "info": "",
+              "meta": null,
+              "block": false,
+              "hidden": false
+            }
+          ],
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "markup": "",
+          "info": "",
+          "meta": null,
+          "block": true,
+          "hidden": false
+        },
+        {
+          "type": "paragraph_close",
+          "tag": "p",
+          "attrs": null,
+          "map": null,
+          "nesting": -1,
+          "level": 0,
+          "children": null,
+          "content": "",
+          "markup": "",
+          "info": "",
+          "meta": null,
+          "block": true,
+          "hidden": false
+        }
+      ];
+
+      markdownRenderer.parse(markdownString, function(err, tokens) {
+        // Okay, let me explain it!
+        //
+        // When you run `sameDeepMembers` without the `JSON.parse/stringify`
+        // you get `expected [ Array(3) ] to have the same members as [ Array(3) ]`,
+        // even if you run it through a diff, you get `0 differences`.
+        //
+        // There must be some secret properties hiding on the object
+        // breaking the equality test (= prototypes).
+        //
+        // Let's run `JSON.parse/stringify` to get rid of them.
+        assert.sameDeepMembers(
+          JSON.parse(JSON.stringify(tokens)),
+          JSON.parse(JSON.stringify(expectedTokens, null, 2))
+        );
+
+        done(err);
+      });
+    });
+  });
+
   describe('#toHtml sync (without callback)', function() {
 
     it('Renders with options passed in', function() {
