@@ -1,17 +1,17 @@
 machine:
   node:
-    version: v0.12
+    version: v4
 
 dependencies:
   pre:
-    - nvm install v0.10
-    - nvm install v0.12
     - nvm install v4
+    - nvm install v6
+    - nvm install v7
     - nvm ls
   override:
     - rm -rf ./node_modules
 test:
   override:
-    - rm -rf ./node_modules && nvm use v0.10 && npm install && npm test
-    - rm -rf ./node_modules && nvm use v0.12 && npm install && npm test
     - rm -rf ./node_modules && nvm use v4 && npm install && npm test
+    - rm -rf ./node_modules && nvm use v6 && npm install && npm test
+    - rm -rf ./node_modules && nvm use v7 && npm install && npm test
