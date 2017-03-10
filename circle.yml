@@ -15,3 +15,9 @@ test:
     - rm -rf ./node_modules && nvm use v4 && npm install && npm test
     - rm -rf ./node_modules && nvm use v6 && npm install && npm test
     - rm -rf ./node_modules && nvm use v7 && npm install && npm test
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run semantic-release || true
