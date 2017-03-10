@@ -50,7 +50,7 @@ const renderingOptions = {
 		noteBlock: true,    // enables :::note block
 		warningBlock: true, // enables :::warning block
 		noteBlock: true,    // enables :::note block
-	
+
 	},
 
 	//custom plugins to MarkedIt. Try not to use those as you are relying on implementation detail
@@ -86,6 +86,10 @@ By default, tests are ran on server as well as in the browser, using
 $ npm run server-test
 $ npm run browser-test
 ```
+
+This package is using [Semantic Release](https://github.com/semantic-release/semantic-release).
+
+Please use proper commit [message format](https://github.com/semantic-release/semantic-release#default-commit-message-format).
 
 ## License
 
