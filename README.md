@@ -1,18 +1,19 @@
 # Blueprint Markdown Renderer
 
-Default parser and set of settings for parsing and rendering of Markdown blocks in API Blueprint
+Default parser and set of settings for parsing and rendering of Markdown blocks in API Description Documents.
 
-## Examples
+## Installation
 
-### Basic Rendering of Blueprint Descriptions
+```shell
+$ npm install blueprint-markdown-renderer
+```
 
-TBD
+## Usage
 
-
-### Basic Rendering Usage
+## Basic Rendering
 
 ```js
-import renderHtml from 'blueprint-markdown-render';
+import { renderHtml } from 'blueprint-markdown-render';
 
 const mdText = '# Heading';
 
@@ -22,55 +23,51 @@ console.log("Rendered HTML: ", html);
 ```
 
 
-## Motivation
-
-While [API Blueprint](https://apiblueprint.org/) syntax is based on Markdown, it doesn't care about the (Markdown) content of description blocks. The [reference parser](https://github.com/apiaryio/drafter) actually preserves the source Markdown in the produced API Elements.
-
-This library is intended to provide a consistent API for parsing those Markdown blocks. Use it to get the same defaults and consistent rendering with the rest of JavaScript API Blueprint ecosystem.
-
-To get consistent experience accross languages, this library uses [CommonMark](http://commonmark.org) implementation under its hood. Following extensions to default rendering is enabled by default:
-
-* TBD
-
 ## Advanced Usage
 
-Note that if you pass in any options, you are potentially diverging from the ecosystem, therefore this is not encouraged. However, it's still better to share the same rendering core with customised behaviour than it is to start for the blank slate.
+Note that if you alter renderer's settings, you are potentially diverging from the ecosystem, therefore this is not encouraged. However, it's still better to share the same rendering core with customised behaviour than it is to start for the blank slate.
+
+Blueprint Markdown Renderer uses [markdown-it](https://github.com/markdown-it/markdown-it) under the hood. See markdown-it [API Documentation](https://markdown-it.github.io/markdown-it/) to find all available options how to change renderer.
 
 ```js
-import renderHtml from 'blueprint-markdown-render';
+import { renderHtml, rendererFactory } from 'blueprint-markdown-render';
+import emojiPlugin from 'markdown-it-emoji';
 
-const mdText = '# Heading';
+const renderer = rendererFactory();
 
-const renderingOptions = {
-	sanitize: false, // Disables HTML sanitization, which is now left up to you. Dangerous, use only if you are triple sure
+// alter default options
+renderer.set({ langPrefix: 'lang-', breaks: true });
 
-	// tweaks rendering extensions
-	formattingExtensions: {
+// add own plugin
+renderer.use(emojiPlugin);
 
-		noteBlock: true,    // enables :::note block
-		warningBlock: true, // enables :::warning block
-		noteBlock: true,    // enables :::note block
+const mdText = ':smiley:';
 
-	},
-
-	//custom plugins to MarkedIt. Try not to use those as you are relying on implementation detail
-	markeditPlugins: {
-
-	}
-
-}
-
-const html = renderHtml(mdText, renderingOptions);
+const html = renderHtml(mdText, {
+  renderer, // custom renderer
+  env, // additional data from parsed input (references, for example)
+  sanitize: true, // run HTML sanitization
+});
 
 console.log("Rendered HTML: ", html);
 
 ```
 
-## Installation
 
-```shell
-$ npm install blueprint-markdown-renderer
-```
+## Motivation
+
+While [API Blueprint](https://apiblueprint.org/) syntax is based on Markdown, it doesn't care about the (Markdown) content of description blocks. The [reference parser](https://github.com/apiaryio/drafter) actually preserves the source Markdown in the produced API Elements. Same logic applies to
+
+This library is intended to provide a consistent API for parsing those Markdown blocks. Use it to get the same defaults and consistent rendering with the rest of JavaScript API Blueprint ecosystem.
+
+To get consistent experience accross languages, this library uses [CommonMark](http://commonmark.org) implementation under its hood. Following extensions to default rendering is enabled by default:
+
+* [Tables](https://help.github.com/articles/organizing-information-with-tables/) (GFM)
+* [Strikethrough](https://help.github.com/articles/basic-writing-and-formatting-syntax/#styling-text) (GFM)
+* [Subscript](http://pandoc.org/MANUAL.html#superscripts-and-subscripts) (Pandoc)
+* [Superscript](http://pandoc.org/MANUAL.html#superscripts-and-subscripts) (Pandoc)
+* [Lazy Headers](https://github.com/Galadirith/markdown-it-lazy-headers) (Relaxed ATX Header syntax)
+
 
 ## Development
 
@@ -91,8 +88,8 @@ This package is using [Semantic Release](https://github.com/semantic-release/sem
 
 Please use proper commit [message format](https://github.com/semantic-release/semantic-release#default-commit-message-format).
 
-## License
 
+## License
 
 MIT (see `LICENSE` file)
 
