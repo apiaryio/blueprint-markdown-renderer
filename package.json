@@ -41,6 +41,6 @@
     }
   },
   "release": {
-    "verifyConditions": "condition-circle"
+    "verifyConditions": "./.wercker/condition-wercker.js"
   }
 }

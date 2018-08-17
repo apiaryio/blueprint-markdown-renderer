@@ -1,0 +1,48 @@
+box: node
+
+build:
+  steps:
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+
+build-latest:
+  steps:
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+    - npm-install
+    - npm-test
+
+build-v6:
+  box: node:6
+  steps:
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+    - npm-install
+    - npm-test
+
+build-v8:
+  box: node:8
+  steps:
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+    - npm-install
+    - npm-test
+
+release:
+  steps:
+    - script:
+        name: Release
+        code: |
+          npm run semantic-release || true    
