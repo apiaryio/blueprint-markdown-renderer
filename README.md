@@ -76,13 +76,6 @@ $ npm install
 $ npm test
 ```
 
-By default, tests are ran on server as well as in the browser, using
-[Karma](http://karma-runner.github.io/). To ran manually just one specific type, use:
-
-```shell
-$ npm run server-test
-$ npm run browser-test
-```
 
 This package is using [Semantic Release](https://github.com/semantic-release/semantic-release).
 
