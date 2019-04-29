@@ -13,7 +13,7 @@ $ npm install blueprint-markdown-renderer
 ## Basic Rendering
 
 ```js
-import { renderHtml } from 'blueprint-markdown-render';
+import { renderHtml } from 'blueprint-markdown-renderer';
 
 const mdText = '# Heading';
 
@@ -30,7 +30,7 @@ Note that if you alter renderer's settings, you are potentially diverging from t
 Blueprint Markdown Renderer uses [markdown-it](https://github.com/markdown-it/markdown-it) under the hood. See markdown-it [API Documentation](https://markdown-it.github.io/markdown-it/) to find all available options how to change renderer.
 
 ```js
-import { renderHtml, rendererFactory } from 'blueprint-markdown-render';
+import { renderHtml, rendererFactory } from 'blueprint-markdown-renderer';
 import emojiPlugin from 'markdown-it-emoji';
 
 const renderer = rendererFactory();
