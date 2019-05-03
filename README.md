@@ -30,7 +30,7 @@ Note that if you alter renderer's settings, you are potentially diverging from t
 Blueprint Markdown Renderer uses [markdown-it](https://github.com/markdown-it/markdown-it) under the hood. See markdown-it [API Documentation](https://markdown-it.github.io/markdown-it/) to find all available options how to change renderer.
 
 ```js
-import { renderHtml, rendererFactory } from 'blueprint-markdown-renderer';
+import { renderHtml, rendererFactory, sanitize } from 'blueprint-markdown-render';
 import emojiPlugin from 'markdown-it-emoji';
 
 const renderer = rendererFactory();
@@ -46,7 +46,7 @@ const mdText = ':smiley:';
 const html = renderHtml(mdText, {
   renderer, // custom renderer
   env, // additional data from parsed input (references, for example)
-  sanitize: true, // run HTML sanitization
+  sanitize, // run HTML sanitization function
 });
 
 console.log("Rendered HTML: ", html);
@@ -76,13 +76,6 @@ $ npm install
 $ npm test
 ```
 
-By default, tests are ran on server as well as in the browser, using
-[Karma](http://karma-runner.github.io/). To ran manually just one specific type, use:
-
-```shell
-$ npm run server-test
-$ npm run browser-test
-```
 
 This package is using [Semantic Release](https://github.com/semantic-release/semantic-release).
 

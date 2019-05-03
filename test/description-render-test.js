@@ -1,8 +1,11 @@
 'use strict';
 
 var assert = require('chai').assert;
+var { JSDOM } = require('jsdom');
+global.window = (new JSDOM('')).window;
 
 var markdownRenderer = require('../lib/index.js');
+var sanitize = markdownRenderer.sanitize;
 
 describe('Markdown', function() {
   describe('#parse', function() {
@@ -226,7 +229,7 @@ describe('Markdown', function() {
         var expectedHtml, markdownString;
         markdownString = '<div><script>HTML tag</script></div>';
         expectedHtml = '<div></div>\n';
-        markdownRenderer.renderHtml(markdownString, function(error, html) {
+        markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
         });
@@ -236,7 +239,7 @@ describe('Markdown', function() {
         var expectedHtml, markdownString;
         markdownString = '<p><custom>HTML tag</custom></p>';
         expectedHtml = '<p>HTML tag</p>\n';
-        markdownRenderer.renderHtml(markdownString, function(error, html) {
+        markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
         });
@@ -246,7 +249,7 @@ describe('Markdown', function() {
         var expectedHtml, markdownString;
         markdownString = '<p custom="test">HTML tag</p>';
         expectedHtml = '<p>HTML tag</p>\n';
-        markdownRenderer.renderHtml(markdownString, function(error, html) {
+        markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
         });
@@ -256,7 +259,7 @@ describe('Markdown', function() {
         var expectedHtml, markdownString;
         markdownString = '```xml\n<xml>Hello World</xml>\n```';
         expectedHtml = '<pre><code class="xml">&lt;xml&gt;Hello World&lt;/xml&gt;\n</code></pre>\n';
-        markdownRenderer.renderHtml(markdownString, function(error, html) {
+        markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
         });
@@ -266,9 +269,70 @@ describe('Markdown', function() {
         var expectedHtml, markdownString;
         markdownString = '<img src="/image.jpg" onerror="alert(\'XSS\')" />';
         expectedHtml = '<img src="/image.jpg">\n';
-        markdownRenderer.renderHtml(markdownString, function(error, html) {
+        markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
+        });
+      });
+
+      context('given <a> tag', function () {
+        it('should not strip href with relative links', function(done) {
+          var markdownString = '[Link to something](../../something.html)';
+          var expectedHtml = '<p><a href="../../something.html">Link to something</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
+        });
+
+        it('should not strip href with url fragment', function(done) {
+          var expectedHtml, markdownString;
+          markdownString = '[internal](#internal)';
+          expectedHtml = '<p><a href="#internal">internal</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
+        });
+
+        it('should not strip href with HTTP scheme', function(done) {
+          var expectedHtml, markdownString;
+          markdownString = 'http://apiary.io';
+          expectedHtml = '<p><a href="http://apiary.io">http://apiary.io</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
+        });
+
+        it('should not strip href with HTTPS scheme', function(done) {
+          var expectedHtml, markdownString;
+          markdownString = 'https://apiary.io';
+          expectedHtml = '<p><a href="https://apiary.io">https://apiary.io</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
+        });
+
+        it('should not strip href with mailto scheme', function(done) {
+          var expectedHtml, markdownString;
+          markdownString = 'mailto:support@apiary.io';
+          expectedHtml = '<p><a href="mailto:support@apiary.io">mailto:support@apiary.io</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
+        });
+
+        it('should strip href with FTP scheme', function(done) {
+          var expectedHtml, markdownString;
+          markdownString = '[ftp](ftp://apiary.io)';
+          expectedHtml = '<p><a>ftp</a></p>\n';
+          markdownRenderer.renderHtml(markdownString, { sanitize: sanitize }, function(error, html) {
+            assert.strictEqual(html, expectedHtml);
+            done(error);
+          });
         });
       });
     });
@@ -279,7 +343,7 @@ describe('Markdown', function() {
         markdownString = '<div><script>HTML tag</script></div>';
         expectedHtml = '<div><script>HTML tag</script></div>\n';
         markdownRenderer.renderHtml(markdownString, {
-          sanitize: false
+          sanitize: null
         }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
@@ -291,7 +355,7 @@ describe('Markdown', function() {
         markdownString = '<p><custom>HTML tag</custom></p>';
         expectedHtml = '<p><custom>HTML tag</custom></p>\n';
         markdownRenderer.renderHtml(markdownString, {
-          sanitize: false
+          sanitize: null
         }, function(error, html) {
           assert.strictEqual(html, expectedHtml);
           done(error);
